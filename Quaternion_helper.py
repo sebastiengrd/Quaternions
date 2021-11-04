@@ -14,7 +14,7 @@ class Quaternion:
         return Quaternion(self.a, -self.b, -self.c, -self.d)
 
     def toPoint(self):
-        if(not self.a == 0):
+        if(not abs(self.a) < 0.01 ):
             raise Exception("Cannot convert Quaternion to a Point. Real part is not 0")
         
         return Point3D(self.b, self.c, self.d)
