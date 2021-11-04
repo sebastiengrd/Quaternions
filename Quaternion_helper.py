@@ -1,5 +1,8 @@
 
 
+from typing import overload
+
+
 class Quaternion:
     def __init__(self, a, b, c, d) -> None:
         self.a = a
@@ -22,4 +25,19 @@ class Quaternion:
 
 class Point3D(Quaternion):
     def __init__(self, x, y, z) -> None:
-        super().__init__(0, x, y, z)
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def __add__(self, other):
+        return Point3D(self.x + other.x, self.y + other.y, self.z + other.z)
+
+    def __sub__(self, other):
+        return Point3D(self.x + other.x, self.y + other.y, self.z + other.z)
+
+
+    def __str__(self) -> str:
+        return f"({self.x}, {self.y}, {self.z})"
+
+    def __repr__(self) -> str:
+        return f"({self.x}, {self.y}, {self.z})"
