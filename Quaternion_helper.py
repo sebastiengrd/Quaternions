@@ -13,6 +13,12 @@ class Quaternion:
     def conj(self):
         return Quaternion(self.a, -self.b, -self.c, -self.d)
 
+    def toPoint(self):
+        if(not self.a == 0):
+            raise Exception("Cannot convert Quaternion to a Point. Real part is not 0")
+        
+        return Point3D(self.b, self.c, self.d)
+
     def __add__(self, other):
         return Quaternion(self.a + other.a, self.b + other.b, self.c + other.c, self.d + other.d)
 
@@ -38,6 +44,9 @@ class Point3D(Quaternion):
         self.x = x
         self.y = y
         self.z = z
+
+    def transform(self, quaternion):
+        return (quaternion*self*quaternion.conj()).toPoint()
 
     def __add__(self, other):
         return Point3D(self.x + other.x, self.y + other.y, self.z + other.z)
